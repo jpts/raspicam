@@ -42,7 +42,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <mutex>
 #include <string>
 #include "raspicamtypes.h"
-#include "private_types.h" 
+#include "private_types.h"
 #include "threadcondition.h"
 namespace raspicam {
     namespace _private
@@ -68,6 +68,9 @@ namespace raspicam {
 //                    _mutex.unlock();
 //                    Thcond.Wait();
                        Thcond.Wait(lck); //this will unlock the mutex and wait atomically
+                }
+                void grabNoWait() {
+                  wantToGrab=true;
                 };
 
 
@@ -122,6 +125,8 @@ namespace raspicam {
             * So type param is ignored. Do not use this parameter.
             * You can use getFormat to know the current format
              */
+            bool grab_dontwait();
+            
             void retrieve ( unsigned char *data,RASPICAM_FORMAT type=RASPICAM_FORMAT_IGNORE );
             /**Alternative to retrieve. Returns a pointer to the original image data buffer.
               * Be careful, if you call grab(), this will be rewritten with the new data
@@ -304,5 +309,3 @@ namespace raspicam {
 };
 
 #endif
-
-

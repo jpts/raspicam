@@ -83,6 +83,7 @@ namespace raspicam {
             * So type param is ignored. Do not use this parameter.
             * You can use getFormat() to know the current format
           */
+        bool grab_dontwait();
         void retrieve ( unsigned char *data,RASPICAM_FORMAT type=RASPICAM_FORMAT_IGNORE );
         /**Alternative to retrieve. Returns a pointer to the original image data buffer (which is in getFormat() format).
           *
@@ -184,4 +185,3 @@ namespace raspicam {
     };
 };
 #endif
-

@@ -63,6 +63,9 @@ namespace raspicam {
     bool RaspiCam::grab() {
         return _impl->grab();
     }
+    bool RaspiCam::grab_dontwait() {
+        return _impl->grab_dontwait();
+    }
 
     void RaspiCam::retrieve ( unsigned char *data,RASPICAM_FORMAT type ) {
         _impl->retrieve ( data,type );
@@ -142,7 +145,7 @@ namespace raspicam {
         _impl->setFrameRate ( frames_per_second );
     }
 
-    
+
     RASPICAM_FORMAT RaspiCam::getFormat()const{return _impl->getFormat( ); }
     unsigned int RaspiCam::getWidth() const{return _impl->getWidth() ;}
     unsigned int RaspiCam::getHeight() const{return _impl->getHeight()  ;}
@@ -171,4 +174,3 @@ namespace raspicam {
 
 
 };
-

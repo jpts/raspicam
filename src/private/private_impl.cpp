@@ -177,6 +177,11 @@ namespace raspicam {
             callback_data.waitForFrame();
             return true;
         }
+        bool Private_Impl::grab_dontwait() {
+            if ( !isCapturing() ) return false;
+            callback_data.grabNoWait();
+            return true;
+        }
         /**
         *
          */
@@ -257,10 +262,10 @@ namespace raspicam {
             }
 
             video_port = camera->output[MMAL_CAMERA_VIDEO_PORT];
-        
+
             //set sensor mode
-            if ( state->sensor_mode != 0 && mmal_port_parameter_set_uint32 ( camera->control, 
-                                                    MMAL_PARAMETER_CAMERA_CUSTOM_SENSOR_CONFIG, 
+            if ( state->sensor_mode != 0 && mmal_port_parameter_set_uint32 ( camera->control,
+                                                    MMAL_PARAMETER_CAMERA_CUSTOM_SENSOR_CONFIG,
                                                     state->sensor_mode)  != MMAL_SUCCESS)
             {
                 cerr << __func__ << ": Failed to set sensmode.";
@@ -890,4 +895,3 @@ namespace raspicam {
         }
     };
 };
-
